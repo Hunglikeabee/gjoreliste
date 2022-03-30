@@ -40,22 +40,53 @@ const itemChecked = async (event) => {
         item.classList.toggle("completed")
     })
     const updateIt = async (isIt) => {
-        const id = event.target.dataset.id
-        const data = JSON.stringify({featured: isIt})
-        const optionsPut = {
-            method: "PUT",
-            body: data,
-            headers: {
-                "Content-Type": "application/json"
+        if(isIt) {
+            const handleBruker = async () => {
+                const id = event.target.dataset.id
+                const bruker = valgtBruker.value;
+                const data = JSON.stringify({featured: isIt, description: bruker})
+                const optionsPut = {
+                    method: "PUT",
+                    body: data,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+                try {
+                    const theResponse = await fetch(APIURL + `/${id}`, optionsPut)
+                    buildItems();
+                    completedBox.style.display = "none";
+                }
+                catch(error) {
+                    console.log(error)
+                }
+            }
+
+            const completedBox = document.querySelector(".completedby")
+            const completedButton = document.querySelector(".bruker-godta")
+            const valgtBruker = document.querySelector("#bruker")
+            completedButton.addEventListener("click", handleBruker)
+            completedBox.style.display = "flex";
+        }
+        else {
+            const id = event.target.dataset.id
+            const data = JSON.stringify({featured: isIt, description: ""})
+            const optionsPut = {
+                method: "PUT",
+                body: data,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+            try {
+                const theResponse = await fetch(APIURL + `/${id}`, optionsPut)
+                buildItems();
+            }
+            catch(error) {
+                console.log(error)
             }
         }
-        try {
-            const theResponse = await fetch(APIURL + `/${id}`, optionsPut)
-            const theResult = await theResponse.json()
-        }
-        catch(error) {
-            console.log(error)
-        }
+
     }
 
     const optionsGet = {
@@ -94,7 +125,12 @@ const buildItems = async () => {
                 if(item.featured) {
                     isCompleted = "completed"
                 }
+                let completedBy = `Utført av: ${item.description}`
+                if(!item.description) {
+                    completedBy = ""
+                }
                 theContainer.innerHTML += `<div class="item item${item.id} ${isCompleted}" >
+                                                <h2 class="bruker-gjort-det">${completedBy}</h2>
                                                 <h3 class="item-title">${item.title}</h3>
                                                 <i class="fa-solid fa-check item-complete item${item.id} ${isCompleted}" data-id="${item.id}"></i>
                                                 <i class="fa-solid fa-xmark item-remove item${item.id}" data-id="${item.id}"></i>

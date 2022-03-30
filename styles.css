@@ -187,3 +187,42 @@ h1 {
   color: white;
   background: black;
 }
+
+.completedby {
+  display: none;
+}
+
+.bruker-godta {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background: lightgreen;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.bruker-godta:hover {
+  padding: 4px 10px;
+  border: 1px solid black;
+  color: white;
+  background: black;
+}
+
+.bruker-gjort-det {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+
+#bruker {
+  padding: 5px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#bruker:hover {
+  border: 1px solid black;
+  padding: 4px;
+}
