@@ -118,6 +118,18 @@ const buildItems = async () => {
     try {
         const response = await fetch(APIURL, options)
         const dataItems = await response.json()
+
+        function fixOrder(a, b) {
+            if (a.id > b.id){
+            return -1;
+            }
+            if (a.id < b.id){
+            return 1;
+            }
+            return 0;
+        }
+        dataItems.sort(fixOrder);
+
         if(dataItems.length > 0) {
             theContainer.innerHTML = "";
             dataItems.forEach((item) => {
