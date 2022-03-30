@@ -7,27 +7,31 @@ const theButton = document.querySelector(".add-button");
 const sendToApi = async (event) => {
     event.preventDefault();
     const theItem = theInput.value.trim();
-    const data = JSON.stringify({ title: theItem, featured: false })
-    const options = {
-        method: "POST",
-        body: data,
-        headers: {
-            "Content-Type": "application/json",
+    if(theItem.length > 2) {
+        const data = JSON.stringify({ title: theItem, featured: false })
+        const options = {
+            method: "POST",
+            body: data,
+            headers: {
+                "Content-Type": "application/json",
+            }
         }
+        try {
+            const response = await fetch(APIURL, options)
+        }
+        catch(error) {
+            console.log(error)
+        }
+        theInput.value = ""
+        buildItems();
     }
-    try {
-        const response = await fetch(APIURL, options)
-    }
-    catch(error) {
-        console.log(error)
-    }
-    theInput.value = ""
-    buildItems();
+
 }
 
 theButton.addEventListener("click", sendToApi)
 
 const itemChecked = async (event) => {
+
     const id = event.target.dataset.id;
 
     const items = document.querySelectorAll(`.item${id}`)
@@ -91,9 +95,9 @@ const buildItems = async () => {
                     isCompleted = "completed"
                 }
                 theContainer.innerHTML += `<div class="item item${item.id} ${isCompleted}" >
-                                                <h2 class="item-title">${item.title}</h2>
-                                                <div class="item-complete item${item.id} ${isCompleted}"  data-id="${item.id}"><i class="fa-solid fa-check" data-id="${item.id}"></i></div>
-                                                <div class="item-remove" data-id="${item.id}"><i class="fa-solid fa-xmark" data-id="${item.id}"></i></div>
+                                                <h3 class="item-title">${item.title}</h3>
+                                                <i class="fa-solid fa-check item-complete item${item.id} ${isCompleted}" data-id="${item.id}"></i>
+                                                <i class="fa-solid fa-xmark item-remove item${item.id}" data-id="${item.id}"></i>
                                             </div>`
             })
 
@@ -122,19 +126,15 @@ const accept = document.querySelector(".accept-button")
 const cancle = document.querySelector(".cancle-button")
 
 
-
-
 const canclePrompt = () => {
     thePrompt.style.display = "none";
 }
 
 const removeItem = async (event) => {
-
     const id = event.target.dataset.id;
     const options = {
         method: "DELETE",
     }
-
     thePrompt.style.display = "block"
 
     const deleteItem = async () => {

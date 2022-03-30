@@ -5,26 +5,34 @@
   font-family: "Roboto", sans-serif;
 }
 
-h1,
-h2 {
+h1, h2 {
   font-family: "Bebas Neue", cursive;
 }
 
 body {
-    background: coral;
+    background: lightseagreen
 }
 
 main {
-  padding: 30px;
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   max-width: 800px;
   margin: 0 auto;
+}
 
+h1 {
+  font-size: 50px;
+  margin-top: 50px;
+  color: white;
+  text-shadow: 4px 4px 2px rgba(0,0,0, 0.6);
 }
 
 .add-container {
-  margin: 0 auto;
+  display: flex;
+  margin: 30px 10px 0px 10px;
 }
 
 .add-input,
@@ -40,13 +48,19 @@ main {
     background: lightgreen;
 }
 
+.add-input {
+  width: 100%;
+  min-width: 0;
+  margin-right: 5px;
+}
+
 .add-button {
-  padding: 5px 15px;
+  padding: 5px 10px;
 }
 
 
 .item-container {
-  width: 400px;
+  width: 500px;
   max-width: 90%;
   margin-top: 50px;
   margin-inline: auto;
@@ -69,43 +83,47 @@ main {
     border-radius: 10px;
     border: 1px solid black;
     width: 100%;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0, 0.4);
 }
 
 .item-title {
-  padding-top: 20px;
+  padding-top: 40px;
+  font-size: 22px;
 }
 
-.item-complete {
+.item-complete, .item-remove {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 5px;
-  right: 60px;
   border: none;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: lightgreen;
   border: 1px solid black;
 }
 
+.item-complete {
+  background: lightgreen;
+  right: 60px;
+}
+
 .item-remove {
-    position: absolute;
+  background: coral;
     right: 10px;
-    top: 5px;
-    border: none;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: coral;
-    border: 1px solid black;
 }
 
 .fa-solid {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-    font-size: 24px;
-    color: white;
+  font-size: 24px;
+  color: white;
+  box-shadow:0px 0px 2px 1px rgba(0,0,0, 0.4);
+}
+
+.fa-solid:hover {
+  color: black;
+  background: white;
+  box-shadow:1px 1px 3px 2px rgba(0,0,0, 0.8);
 }
 
 .completed {
@@ -144,4 +162,28 @@ main {
   z-index: 9001;
   display: flex;
   flex-direction: column;
+}
+
+.accept-button, .cancle-button {
+  border: none;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0, 0.4);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.accept-button {
+  background: lightgreen;
+  font-size: 34px;
+}
+
+
+.cancle-button {
+  background: lightcoral;
+  font-size: 24px;
+}
+
+.accept-button:hover, .cancle-button:hover {
+  color: white;
+  background: black;
 }
