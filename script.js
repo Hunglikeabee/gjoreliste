@@ -111,6 +111,7 @@ const itemChecked = async (event) => {
 }
 
 const buildItems = async () => {
+    theContainer.innerHTML = `<div class="loading-wheel"></div>`
     const options = {
         method: "GET",
         "Content-Type": "application/json",

@@ -10,7 +10,7 @@ h1, h2 {
 }
 
 body {
-    background: lightseagreen
+    background: lightseagreen;
 }
 
 main {
@@ -225,4 +225,23 @@ h1 {
 #bruker:hover {
   border: 1px solid black;
   padding: 4px;
+}
+
+.loading-wheel {
+  border: 2px solid white;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border-top: 2px solid black;
+  animation: rotate 3s forwards linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
